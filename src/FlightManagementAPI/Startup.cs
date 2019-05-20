@@ -96,6 +96,9 @@ namespace Pitstop.Application.FlightManagement
                 cfg.CreateMap<RegisterFlight, Flight>();
                 cfg.CreateMap<RegisterFlight, FlightRegistered>()
                     .ForCtorParam("messageId", opt => opt.MapFrom(c => Guid.NewGuid()));
+                cfg.CreateMap<RemoveFlight, Flight>();
+                cfg.CreateMap<RemoveFlight, FlightRemoved>()
+                    .ForCtorParam("messageId", opt => opt.MapFrom(c => Guid.NewGuid()));
             });
         }
     }
