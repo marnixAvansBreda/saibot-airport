@@ -24,6 +24,18 @@ services:
       - ACCEPT_EULA=Y 
       - MSSQL_PID=Developer
       - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
+      
+  sqlserverflightmanagement:
+    image: microsoft/mssql-server-linux:latest
+    container_name: sqlserverflightmanagement
+    volumes:
+      - sqlserverflightmanagementdata:/var/opt/mssql 
+    ports:
+      - "1439:1433"
+    environment:
+      - ACCEPT_EULA=Y 
+      - MSSQL_PID=Developer
+      - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
 
   mailserver:
     image: djfarrelly/maildev
@@ -48,6 +60,17 @@ services:
       - sqlserver
     ports:
       - "5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  flightmanagementapi:
+    image: pitstop/flightmanagementapi:latest
+    build: FlightManagementAPI
+    depends_on:
+      - rabbitmq
+      - sqlserverflightmanagement
+    ports:
+      - "5900"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
@@ -123,6 +146,15 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production
 
+#  customereventhandler:
+#     image: pitstop/customereventhandler:latest
+#     build: CustomerEventHandler
+#     container_name: CustomerEventHandler
+#     depends_on: 
+#       - rabbitmq
+#     environment:
+#       - DOTNET_ENVIRONMENT=Productio
+
   webapp:
     image: pitstop/webapp:latest
     build: WebApp
@@ -131,6 +163,7 @@ services:
       - customermanagementapi
       - vehiclemanagementapi
       - workshopmanagementapi
+      - flightmanagementapi
     ports:
       - "7000:7000"
     environment:
@@ -138,6 +171,8 @@ services:
 
 volumes:
   sqlserverdata:
+    external: true   
+  sqlserverflightmanagementdata:
     external: true    
   rabbitmqdata:
     external: true
