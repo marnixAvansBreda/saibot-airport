@@ -21,3 +21,7 @@ services:
   flightmanagementapi:
     ports:
       - "5900:5900"
+
+  baggagesetmanagementapi:
+    ports: 
+      - "5001:5001"
