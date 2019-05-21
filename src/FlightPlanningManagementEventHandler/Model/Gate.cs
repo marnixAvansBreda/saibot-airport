@@ -7,6 +7,6 @@ namespace Pitstop.FlightPlanningManagementEventHandler.Model
 {
 	public class Gate
 	{
-		public string GateId { get; set; }
+		public int GateId { get; set; }
 	}
 }

@@ -19,6 +19,8 @@ namespace Pitstop.FlightScheduleManagementEventHandler.Migrations
             {
                 b.Property<string>("FlightId");
 
+                b.Property<string>("AirlineName");
+
                 b.Property<string>("FlightNumber");
 
                 b.Property<string>("Destination");

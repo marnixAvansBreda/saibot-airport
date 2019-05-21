@@ -44,7 +44,7 @@ namespace Pitstop.NotificationService
                         string rabbitMQHost = rabbitMQConfigSection["Host"];
                         string rabbitMQUserName = rabbitMQConfigSection["UserName"];
                         string rabbitMQPassword = rabbitMQConfigSection["Password"];
-                        return new RabbitMQMessageHandler(rabbitMQHost, rabbitMQUserName, rabbitMQPassword, "Pitstop", "Notifications", ""); ;
+                        return new RabbitMQMessageHandler(rabbitMQHost, rabbitMQUserName, rabbitMQPassword, "Pitstop", "BorderSecurityNotifications", ""); ;
                     });
 
                     services.AddTransient<INotificationRepository>((svc) =>

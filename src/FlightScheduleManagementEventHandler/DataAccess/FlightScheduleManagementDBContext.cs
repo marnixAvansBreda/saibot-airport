@@ -37,15 +37,15 @@ namespace Pitstop.FlightScheduleManagementEventHandler.DataAccess
             base.OnModelCreating(builder);
         }
 
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    // only used by EF tooling
-        //    // TODO: make CN configurable
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        optionsBuilder.UseSqlServer("server=sqlserverflightschedule;user id=sa;password=8jkGh47hnDw89Haq8LN2;database=FlightScheduleManagement;");
-        //    }
-        //    base.OnConfiguring(optionsBuilder);
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // only used by EF tooling
+            // TODO: make CN configurable
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("server=sqlserverflightschedule;user id=sa;password=8jkGh47hnDw89Haq8LN2;database=FlightScheduleManagement;");
+            }
+            base.OnConfiguring(optionsBuilder);
+        }
     }
 }

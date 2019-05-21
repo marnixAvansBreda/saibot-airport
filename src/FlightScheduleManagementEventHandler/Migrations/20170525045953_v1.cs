@@ -8,11 +8,13 @@ namespace Pitstop.FlightScheduleManagementEventHandler.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateTable(
                 name: "Flight",
                 columns: table => new
                 {
                     FlightId = table.Column<string>(nullable: false),
+                    AirlineName = table.Column<string>(nullable: true),
                     FlightNumber = table.Column<string>(nullable: false),
                     Destination = table.Column<string>(nullable: true),
                     Origin = table.Column<string>(nullable: true)

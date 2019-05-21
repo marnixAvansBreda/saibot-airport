@@ -12,21 +12,23 @@ namespace Pitstop.FlightPlanningManagementEventHandler.DataAccess
         { }
 
         public DbSet<ScheduledFlight> ScheduledFlights { get; set; }
-        public DbSet<ScheduledFlight> Airlines { get; set; }
-        public DbSet<ScheduledFlight> Gates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<ScheduledFlight>().HasKey(entity => entity.ScheduledFlightId);
             builder.Entity<ScheduledFlight>().ToTable("ScheduledFlight");
 
-            builder.Entity<Airline>().HasKey(entity => entity.AirlineId);
-            builder.Entity<Airline>().ToTable("Airline");
-
-            builder.Entity<Gate>().HasKey(entity => entity.GateId);
-            builder.Entity<Gate>().ToTable("Gate");
-
             base.OnModelCreating(builder);
         }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    // only used by EF tooling
+        //    // TODO: make CN configurable
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("server=sqlserverflightplanningmanagement;user id=sa;password=8jkGh47hnDw89Haq8LN2;database=FlightPlanningManagement;");
+        //    }
+        //    base.OnConfiguring(optionsBuilder);
+        //}
     }
 }

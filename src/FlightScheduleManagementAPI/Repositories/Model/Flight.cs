@@ -7,7 +7,16 @@ namespace Pitstop.FlightScheduleManagementAPI.Repositories.Model
 {
     public class Flight
     {
-        public int FlightId { get; set; }
-        public string FlightDestination { get; set; }
+        public string FlightId { get; private set; }
+        public string Destination { get; private set; }
+        public string Origin { get; set; }
+        public string AirlineName { get; set; }
+        public Flight(string flightId, string flightDestination, string origin, string airlineName)
+        {
+            FlightId = flightId;
+            Destination = flightDestination;
+            Origin = origin;
+            AirlineName = airlineName;
+        }
     }
 }

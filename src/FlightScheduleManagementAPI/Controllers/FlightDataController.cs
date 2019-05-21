@@ -23,7 +23,7 @@ namespace Pitstop.FlightScheduleManagementAPI.Controllers
 
         [HttpGet]
         [Route("flights/{flightId}")]
-        public async Task<IActionResult> GetFlightByFlightId(int flightId)
+        public async Task<IActionResult> GetFlightByFlightId(string flightId)
         {
             var flight = await _flightRepo.GetFlightAsync(flightId);
             if (flight == null)

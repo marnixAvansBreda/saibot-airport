@@ -110,7 +110,8 @@ namespace Pitstop.FlightScheduleManagementEventHandler
                         FlightId = e.FlightInfo.Id,
                         Destination = e.FlightInfo.flightDestination,
                         Origin = e.FlightInfo.flightOrigin,
-                        FlightNumber = e.FlightInfo.flightNumber
+                        FlightNumber = e.FlightInfo.flightNumber,
+                        AirlineName = e.FlightInfo.airlineName
                     };
                 }
                 Log.Information("Flight " + flight.ToString());
@@ -155,7 +156,6 @@ namespace Pitstop.FlightScheduleManagementEventHandler
                 scheduledFlight.CheckInCounter = counter;
                 scheduledFlight.PlannedStartTime = e.StartTime;
                 scheduledFlight.PlannedEndTime = e.EndTime;
-
                 Log.Information("Scheduled flight " + scheduledFlight.ScheduledFlightId + scheduledFlight.Flight.FlightId + scheduledFlight.Airplane.AirplaneId
                     + scheduledFlight.CheckInCounter.CheckInCounterId + scheduledFlight.PlannedStartTime + scheduledFlight.PlannedEndTime);
                 await _dbContext.ScheduledFlights.AddAsync(scheduledFlight);

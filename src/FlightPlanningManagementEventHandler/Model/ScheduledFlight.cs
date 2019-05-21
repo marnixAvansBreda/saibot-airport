@@ -5,11 +5,11 @@ namespace Pitstop.FlightPlanningManagementEventHandler.Model
 {
     public class ScheduledFlight
     {
-		public string ScheduledFlightId { get; set; }
-		public string Destination { get; set; }
-		public Gate Gate { get; set; }
-		public Airline Airline { get; set; }
-		public DateTime DepartureTime { get; set; }
-		public DateTime ArrivalTime { get; set; }
-	}
+        public int ScheduledFlightId { get; set; }
+        public Flight Flight { get; set; }
+        public Gate Gate { get; set; }
+        public CheckinCounter CheckInCounter { get; set; }
+        public DateTime PlannedStartTime { get; set; }
+        public DateTime PlannedEndTime { get; set; }
+    }
 }

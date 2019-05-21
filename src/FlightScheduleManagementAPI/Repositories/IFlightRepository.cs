@@ -9,7 +9,7 @@ namespace Pitstop.FlightScheduleManagementAPI.Repositories
     public interface IFlightRepository
     {
         Task<IEnumerable<Flight>> GetFlightsAsync();
-        Task<Flight> GetFlightAsync(int flightid);
+        Task<Flight> GetFlightAsync(string flightid);
 
     }
 }

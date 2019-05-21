@@ -9,5 +9,6 @@ namespace Pitstop.FlightManagement.Model
 	{
 		public string AirlineId { get; set; }
 		public string Name { get; set; }
+        public string FlightId { get; set; }
 	}
 }

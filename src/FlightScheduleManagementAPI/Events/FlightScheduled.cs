@@ -13,13 +13,13 @@ namespace Pitstop.FlightScheduleManagementAPI.Events
         public readonly DateTime EndTime;
         public readonly (int Id, string gateName) GateInfo;
         public readonly (int Id, string airPlaneNumber) AirplaneInfo;
-        public readonly (int Id, string flightDestination) FlightInfo;
+        public readonly (string Id, string flightDestination, string flightOrigin, string flightNumber, string airlineName) FlightInfo;
         public readonly (int Id, string counterName) CheckinCounterInfo;
 
         public FlightScheduled(Guid messageId, int scheduleId, DateTime startTime, DateTime endTime,
             (int Id, string gateName) gateInfo,
             (int Id, string airplaneInfo) airplaneInfo,
-            (int Id, string flightDestination) flightInfo,
+            (string Id, string flightDestination, string flightOrigin, string flightNumber, string airlineName) flightInfo,
             (int Id, string counterName) checkInCounterInfo) : base(messageId)
         {
             ScheduleId = scheduleId;

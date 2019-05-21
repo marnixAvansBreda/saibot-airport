@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Linq;
 using Pitstop.FlightPlanningManagementEventHandler.DataAccess;
 using Pitstop.FlightPlanningManagementEventHandler.Events;
+using Pitstop.FlightPlanningManagementEventHandler.Model;
 using Pitstop.Infrastructure.Messaging;
 using Serilog;
 using System;
@@ -68,23 +69,46 @@ namespace Pitstop.FlightPlanningManagementEventHandler
 
         private async Task<bool> HandleAsync(FlightScheduled e)
         {
-            Log.Information("Flight scheduled: {ScheduledFlightId}, {Destination}, {Gate}, {Airline}, {ArrivalTime}, {DepartureTime}",
-                e.ScheduledFlightId, e.Destination, e.Gate, e.Airline, e.ArrivalTime, e.DepartureTime);
+            Log.Information("Flight scheduled: {FlightScheduleId}, {StartTime}, {EndTime}",
+                e.ScheduleId, e.StartTime, e.EndTime);
 
             try
             {
                 // insert scheduled flight
-                var scheduledFlight = await _dbContext.ScheduledFlights.SingleOrDefaultAsync(sf => sf.ScheduledFlightId == e.ScheduledFlightId);
-                scheduledFlight.Destination = e.Destination;
-                scheduledFlight.Gate = e.Gate;
-                scheduledFlight.Airline = e.Airline;
-                scheduledFlight.ArrivalTime = e.ArrivalTime;
-                scheduledFlight.DepartureTime = e.DepartureTime;
+
+
+                   ScheduledFlight scheduledFlight = new ScheduledFlight();
+                    Log.Information("schedule line 82 " + scheduledFlight.ScheduledFlightId + " " + scheduledFlight.Flight.AirlineName);
+                    Flight flight = new Flight
+                    {
+                        FlightId = e.FlightInfo.Id,
+                        FlightNumber = e.FlightInfo.flightNumber,
+                        Destination = e.FlightInfo.flightDestination,
+                        AirlineName = e.FlightInfo.airlineName,
+                        Origin = e.FlightInfo.flightOrigin
+                    };
+                    CheckinCounter counter = new CheckinCounter
+                    {
+                        CheckInCounterId = e.CheckinCounterInfo.Id,
+                        CheckInCounterName = e.CheckinCounterInfo.counterName
+                    };
+                    Gate gate = new Gate
+                    {
+                        GateId = e.GateInfo.Id,
+                    };
+                    scheduledFlight.ScheduledFlightId = e.ScheduleId;
+                    scheduledFlight.Flight = flight;
+                    scheduledFlight.Gate = gate;
+                    scheduledFlight.CheckInCounter = counter;
+                    scheduledFlight.PlannedStartTime = e.StartTime;
+                    scheduledFlight.PlannedEndTime = e.EndTime;
+                Log.Information("saving line 107 " + scheduledFlight.ScheduledFlightId);
+                await _dbContext.ScheduledFlights.AddAsync(scheduledFlight);
                 await _dbContext.SaveChangesAsync();
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException exc)
             {
-                Log.Warning("Skipped adding flight with id {ScheduledFlightId}.", e.ScheduledFlightId);
+                Log.Warning("Skipped adding flight with id {ScheduledFlightId}.", e.ScheduleId, exc.InnerException.Message);
             }
 
             return true;

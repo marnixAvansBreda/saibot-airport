@@ -16,9 +16,12 @@ namespace Pitstop.FlightScheduleManagementEventHandler.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
 
+
             modelBuilder.Entity("Pitstop.FlightScheduleManagementEventHandler.Flight", b =>
                 {
                     b.Property<string>("FlightId");
+
+                    b.Property<string>("AirlineName");
 
                     b.Property<string>("FlightNumber");
 

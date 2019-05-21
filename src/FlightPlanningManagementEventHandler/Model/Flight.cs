@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pitstop.FlightScheduleManagementEventHandler.Model
+namespace Pitstop.FlightPlanningManagementEventHandler.Model
 {
     public class Flight
     {

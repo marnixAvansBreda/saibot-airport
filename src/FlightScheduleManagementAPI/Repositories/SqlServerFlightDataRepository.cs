@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data.SqlClient;
 using Pitstop.FlightScheduleManagementAPI.Repositories.Model;
+using Serilog;
 
 namespace Pitstop.FlightScheduleManagementAPI.Repositories
 {
@@ -17,21 +18,24 @@ namespace Pitstop.FlightScheduleManagementAPI.Repositories
 
         public async Task<IEnumerable<Flight>> GetFlightsAsync()
         {
-            List<Flight> customers = new List<Flight>();
+            List<Flight> flights = new List<Flight>();
+            Log.Information("sqlserverrepo " + _connectionString);
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {
+                Log.Error("connection " + conn.DataSource + " " + conn.Database + " " + conn.ClientConnectionId);
+                Log.Error("Test log line 25");
                 var flightsSelection = await conn.QueryAsync<Flight>("select * from Flight");
-
+                Log.Information("flightselection " + flightsSelection);
                 if (flightsSelection != null)
                 {
-                    customers.AddRange(flightsSelection);
+                    flights.AddRange(flightsSelection);
                 }
             }
-
-            return customers;
+            Log.Error("flights " + flights.Count);
+            return flights;
         }
 
-        public async Task<Flight> GetFlightAsync(int flightId)
+        public async Task<Flight> GetFlightAsync(string flightId)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString))
             {

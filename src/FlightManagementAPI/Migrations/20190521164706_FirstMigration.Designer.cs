@@ -9,25 +9,29 @@ using Pitstop.FlightManagement.DataAccess;
 namespace Pitstop.FlightManagement.Migrations
 {
     [DbContext(typeof(FlightManagementDBContext))]
-    [Migration("20190521131712_v1")]
-    partial class v1
+    [Migration("20190521164706_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Pitstop.FlightManagement.Model.Airline", b =>
                 {
-                    b.Property<string>("AirlineId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("AirlineId");
+
+                    b.Property<string>("FlightId");
 
                     b.Property<string>("Name");
 
-                    b.HasKey("AirlineId");
+                    b.HasKey("AirlineId", "FlightId");
+
+                    b.HasIndex("FlightId")
+                        .IsUnique();
 
                     b.ToTable("Airline");
                 });
@@ -37,8 +41,6 @@ namespace Pitstop.FlightManagement.Migrations
                     b.Property<string>("FlightId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AirlineId");
-
                     b.Property<string>("Destination");
 
                     b.Property<string>("FlightNumber");
@@ -47,16 +49,15 @@ namespace Pitstop.FlightManagement.Migrations
 
                     b.HasKey("FlightId");
 
-                    b.HasIndex("AirlineId");
-
                     b.ToTable("Flight");
                 });
 
-            modelBuilder.Entity("Pitstop.FlightManagement.Model.Flight", b =>
+            modelBuilder.Entity("Pitstop.FlightManagement.Model.Airline", b =>
                 {
-                    b.HasOne("Pitstop.FlightManagement.Model.Airline", "Airline")
-                        .WithMany()
-                        .HasForeignKey("AirlineId");
+                    b.HasOne("Pitstop.FlightManagement.Model.Flight")
+                        .WithOne("Airline")
+                        .HasForeignKey("Pitstop.FlightManagement.Model.Airline", "FlightId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

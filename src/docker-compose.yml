@@ -92,13 +92,14 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production
 
-  customermanagementapi:
-    image: pitstop/customermanagementapi:latest
-    build: CustomerManagementAPI
-
-      - sqlserver
+  flightschedulemanagementapi:
+    image: pitstop/flightschedulemanagementapi:latest
+    build: FlightScheduleManagementAPI
+    depends_on:
+      - rabbitmq
+      - sqlserverflightschedule
     ports:
-      - "5100"
+      - "5800"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
@@ -131,15 +132,6 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production
 
-  timeservice:
-    image: pitstop/timeservice:latest
-    build: TimeService
-    container_name: timeservice
-    depends_on:
-      - rabbitmq
-    environment:
-      - DOTNET_ENVIRONMENT=Production
-
   baggagesetmanagementeventhandler:
     image: pitstop/baggagemanagementeventhandler:latest
     build: BaggageSetManagementEventHandler
@@ -160,12 +152,17 @@ services:
     environment:
     - DOTNET_ENVIRONMENT=Production
 
-
-
+  flightplanningmanagementeventhandler:
+    image: pitstop/flightplanningmanagementeventhandler:latest
+    build: FlightPlanningManagementEventHandler
+    container_name: flightplanningmanagementeventhandler
+    depends_on:
+    - rabbitmq
+    - sqlserverflightplanningmanagement
+    environment:
+    - DOTNET_ENVIRONMENT=Production
 
 volumes:
-  sqlserverdata:
-    external: true   
   sqlserverflightmanagementdata:
     external: true
   sqlserverflightscheduledata:

@@ -56,10 +56,10 @@ namespace Pitstop.FlightPlanningManagementEventHandler
 							.Options;
 						var dbContext = new FlightPlanningManagementDBContext(dbContextOptions);
 
-						Policy
-							.Handle<Exception>()
-							.WaitAndRetry(5, r => TimeSpan.FromSeconds(5), (ex, ts) => { Log.Error("Error connecting to DB. Retrying in 5 sec."); })
-							.Execute(() => DBInitializer.Initialize(dbContext));
+						//Policy
+						//	.Handle<Exception>()
+						//	.WaitAndRetry(5, r => TimeSpan.FromSeconds(5), (ex, ts) => { Log.Error("Error connecting to DB. Retrying in 5 sec."); })
+						//	.Execute(() => DBInitializer.Initialize(dbContext));
 
 						return dbContext;
 					});

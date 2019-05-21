@@ -59,7 +59,7 @@ namespace Pitstop.FlightScheduleManagementAPI.Domain
         {
             // ScheduledFlight schedule = new ScheduledFlight();
             Log.Error("scheduledflight line 61 " + e.ScheduleId + e.FlightInfo.flightDestination);
-            Flight flight = new Flight(e.FlightInfo.Id, e.FlightInfo.flightDestination);
+            Flight flight = new Flight(e.FlightInfo.Id, e.FlightInfo.flightDestination, e.FlightInfo.flightOrigin, e.FlightInfo.airlineName);
             Gate gate = new Gate(e.GateInfo.Id, e.GateInfo.gateName);
             Airplane airplane = new Airplane(e.AirplaneInfo.Id, e.AirplaneInfo.airPlaneNumber);
             CheckinCounter counter = new CheckinCounter(e.CheckinCounterInfo.Id, e.CheckinCounterInfo.counterName);

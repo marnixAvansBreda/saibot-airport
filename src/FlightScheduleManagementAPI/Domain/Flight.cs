@@ -7,12 +7,16 @@ namespace Pitstop.FlightScheduleManagementAPI.Domain
 {
     public class Flight
     {
-        public int FlightId { get; private set; }
-        public string FlightDestination { get; private set; }
-        public Flight(int flightId, string flightDestination)
+        public string FlightId { get; private set; }
+        public string Destination { get; private set; }
+        public string Origin { get; set; }
+        public string AirlineName { get; set; }
+        public Flight(string flightId, string flightDestination, string origin, string airlineName)
         {
             FlightId = flightId;
-            FlightDestination = flightDestination;
+            Destination = flightDestination;
+            Origin = origin;
+            AirlineName = airlineName;
         }
     }
 }

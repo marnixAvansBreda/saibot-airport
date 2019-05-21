@@ -1,4 +1,5 @@
-﻿using Pitstop.Infrastructure.Messaging;
+﻿using Pitstop.FlightScheduleManagementEventHandler.Model;
+using Pitstop.Infrastructure.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Text;
