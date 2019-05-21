@@ -12,19 +12,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=rabbitmquser
       - RABBITMQ_DEFAULT_PASS=DEBmbwkSrzy9D1T9cJfa
-      
-  sqlserver:
-    image: microsoft/mssql-server-linux:latest
-    container_name: sqlserver
-    volumes:
-      - sqlserverdata:/var/opt/mssql 
-    ports:
-      - "1434:1433"
-    environment:
-      - ACCEPT_EULA=Y 
-      - MSSQL_PID=Developer
-      - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
-      
+
   sqlserverflightmanagement:
     image: microsoft/mssql-server-linux:latest
     container_name: sqlserverflightmanagement
@@ -32,6 +20,18 @@ services:
       - sqlserverflightmanagementdata:/var/opt/mssql 
     ports:
       - "1439:1433"
+    environment:
+      - ACCEPT_EULA=Y 
+      - MSSQL_PID=Developer
+      - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
+      
+  sqlserverflightplanningmanagement:
+    image: microsoft/mssql-server-linux:latest
+    container_name: sqlserverflightplanningmanagement
+    volumes:
+      - sqlserverflightplanningmanagementdata:/var/opt/mssql 
+    ports:
+      - "1440:1433"
     environment:
       - ACCEPT_EULA=Y 
       - MSSQL_PID=Developer
@@ -49,13 +49,6 @@ services:
       - MSSQL_PID=Developer
       - SA_PASSWORD=8jkGh47hnDw89Haq8LN2     
 
-  mailserver:
-    image: djfarrelly/maildev
-    container_name: mailserver
-    ports:
-      - "25:25"
-      - "4000:80"
-
   logserver:
     image: datalust/seq:latest
     container_name: logserver
@@ -63,17 +56,6 @@ services:
       - "5341:80"
     environment:
       - ACCEPT_EULA=Y 
-
-  vehiclemanagementapi:
-    image: pitstop/vehiclemanagementapi:latest
-    build: VehicleManagementAPI
-    depends_on:
-      - rabbitmq
-      - sqlserver
-    ports:
-      - "5000"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
 
   flightmanagementapi:
     image: pitstop/flightmanagementapi:latest
@@ -86,6 +68,28 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
 
+  flightplanningmanagementapi:
+    image: pitstop/flightplanningmanagementapi:latest
+    build: FlightPlanningManagementAPI
+    container_name: flightplanningmanagementapi
+    depends_on:
+      - rabbitmq
+      - sqlserverflightplanningmanagement
+    ports:
+      - "5901"
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
+  flightplanningmanagementeventhandler:
+    image: pitstop/flightplanningmanagementeventhandler:latest
+    build: FlightPlanningManagementEventHandler
+    container_name: flightplanningmanagementeventhandler
+    depends_on:
+      - rabbitmq
+      - sqlserverflightplanningmanagement
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
   baggagesetmanagementapi:
     image: pitstop/baggagesetmanagementapi:latest
     build: BaggageSetManagementAPI
@@ -97,28 +101,6 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production      
 
-  customermanagementapi:
-    image: pitstop/customermanagementapi:latest
-    build: CustomerManagementAPI
-    depends_on:
-      - rabbitmq
-      - sqlserver
-    ports:
-      - "5100"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-
-  workshopmanagementapi:
-    image: pitstop/workshopmanagementapi:latest
-    build: WorkshopManagementAPI
-    depends_on:
-      - rabbitmq
-      - sqlserver
-    ports:
-      - "5200"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-
   auditlogservice:
     image: pitstop/auditlogservice:latest
     build: AuditlogService
@@ -128,44 +110,12 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production
 
-  invoiceservice:
-    image: pitstop/invoiceservice:latest
-    build: InvoiceService
-    container_name: invoiceservice
-    depends_on:
-      - rabbitmq
-      - sqlserver
-      - mailserver
-    environment:
-      - DOTNET_ENVIRONMENT=Production
-
-  notificationservice:
-    image: pitstop/notificationservice:latest
-    build: NotificationService
-    container_name: notificationservice
-    depends_on:
-      - rabbitmq
-      - sqlserver
-      - mailserver
-    environment:
-      - DOTNET_ENVIRONMENT=Production
-
   timeservice:
     image: pitstop/timeservice:latest
     build: TimeService
     container_name: timeservice
     depends_on:
       - rabbitmq
-    environment:
-      - DOTNET_ENVIRONMENT=Production
-
-  workshopmanagementeventhandler:
-    image: pitstop/workshopmanagementeventhandler:latest
-    build: WorkshopManagementEventHandler
-    container_name: workshopmanagementeventhandler
-    depends_on:
-      - rabbitmq
-      - sqlserver
     environment:
       - DOTNET_ENVIRONMENT=Production
 
@@ -179,34 +129,11 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production    
 
-#  customereventhandler:
-#     image: pitstop/customereventhandler:latest
-#     build: CustomerEventHandler
-#     container_name: CustomerEventHandler
-#     depends_on: 
-#       - rabbitmq
-#     environment:
-#       - DOTNET_ENVIRONMENT=Productio
-
-  webapp:
-    image: pitstop/webapp:latest
-    build: WebApp
-    container_name: webapp
-    depends_on:
-      - customermanagementapi
-      - vehiclemanagementapi
-      - workshopmanagementapi
-      - flightmanagementapi
-    ports:
-      - "7000:7000"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-
 volumes:
-  sqlserverdata:
-    external: true   
   sqlserverflightmanagementdata:
     external: true    
+  sqlserverflightplanningmanagementdata:
+    external: true  
   rabbitmqdata:
     external: true
   baggagesetdata:
