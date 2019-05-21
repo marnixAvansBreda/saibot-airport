@@ -37,6 +37,18 @@ services:
       - MSSQL_PID=Developer
       - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
 
+  sqlserverflightschedule:
+     image: microsoft/mssql-server-linux:latest
+     container_name: sqlserverflightschedule
+     volumes:
+       - sqlserverflightscheduledata:/var/opt/mssql 
+     ports:
+       - "1440:1433"
+     environment:
+       - ACCEPT_EULA=Y 
+       - MSSQL_PID=Developer
+       - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
+
   sqlserverbaggage:
     image: microsoft/mssql-server-linux:latest
     container_name: sqlserverbaggage
@@ -95,7 +107,18 @@ services:
     ports:
       - "5001"
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production      
+      - ASPNETCORE_ENVIRONMENT=Production
+
+  flightschedulemanagementapi:
+    image: pitstop/flightschedulemanagementapi:latest
+    build: FlightScheduleManagementAPI
+    depends_on:
+      - rabbitmq
+      - sqlserverflightschedule
+    ports:
+      - "5800"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
 
   customermanagementapi:
     image: pitstop/customermanagementapi:latest
@@ -177,7 +200,17 @@ services:
       - rabbitmq
       - sqlserverbaggage
     environment:
-      - DOTNET_ENVIRONMENT=Production    
+      - DOTNET_ENVIRONMENT=Production
+
+  flightschedulemanagementeventhandler:
+    image: pitstop/flightschedulemanagementeventhandler:latest
+    build: FlightScheduleManagementEventHandler
+    container_name: flightschedulemanagementeventhandler
+    depends_on:
+    - rabbitmq
+    - sqlserverflightschedule
+    environment:
+    - DOTNET_ENVIRONMENT=Production
 
 #  customereventhandler:
 #     image: pitstop/customereventhandler:latest
@@ -206,7 +239,9 @@ volumes:
   sqlserverdata:
     external: true   
   sqlserverflightmanagementdata:
-    external: true    
+    external: true
+  sqlserverflightscheduledata:
+    external: true
   rabbitmqdata:
     external: true
   baggagesetdata:
