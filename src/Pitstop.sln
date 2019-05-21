@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.352
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleManagementAPI", "VehicleManagementAPI\VehicleManagementAPI.csproj", "{9C0B9864-8CF3-4352-A84C-BC0521668BCB}"
 EndProject
@@ -44,9 +44,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagementAPI", "Flig
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaggageSetManagement", "BaggageSetManagementAPI\BaggageSetManagement.csproj", "{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanningManagementAPI", "FlightPlanningManagementAPI\FlightPlanningManagementAPI.csproj", "{597FD754-2831-41F8-A5C4-B8A81CA030CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightPlanningManagementAPI", "FlightPlanningManagementAPI\FlightPlanningManagementAPI.csproj", "{597FD754-2831-41F8-A5C4-B8A81CA030CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightPlanningManagementEventHandler", "FlightPlanningManagementEventHandler\FlightPlanningManagementEventHandler.csproj", "{603B0F89-A8DA-4500-8B18-6020239317B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightPlanningManagementEventHandler", "FlightPlanningManagementEventHandler\FlightPlanningManagementEventHandler.csproj", "{603B0F89-A8DA-4500-8B18-6020239317B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaggageSetManagementEventHandler", "BaggageSetManagementEventHandler\BaggageSetManagementEventHandler.csproj", "{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -219,6 +221,18 @@ Global
 		{603B0F89-A8DA-4500-8B18-6020239317B9}.Release|x64.Build.0 = Release|Any CPU
 		{603B0F89-A8DA-4500-8B18-6020239317B9}.Release|x86.ActiveCfg = Release|Any CPU
 		{603B0F89-A8DA-4500-8B18-6020239317B9}.Release|x86.Build.0 = Release|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Debug|x64.Build.0 = Debug|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Debug|x86.Build.0 = Debug|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Release|x64.ActiveCfg = Release|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Release|x64.Build.0 = Release|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Release|x86.ActiveCfg = Release|Any CPU
+		{F626DAE1-F7F7-4C85-BFC2-04DD6C7BDB5B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
