@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Pitstop.BaggageSetManagement</AssemblyName>
-    <RootNamespace>Pitstop.Application.BaggageSetManagement</RootNamespace>
+    <RootNamespace>Pitstop.BaggageSetManagement</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

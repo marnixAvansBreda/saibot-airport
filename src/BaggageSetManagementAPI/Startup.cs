@@ -5,18 +5,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Pitstop.Application.BaggageSetManagement.DataAccess;
+using Pitstop.BaggageSetManagement.DataAccess;
 using Swashbuckle.AspNetCore.Swagger;
 using AutoMapper;
-using Pitstop.Application.BaggageSetManagement.Model;
+using Pitstop.BaggageSetManagement.Model;
 using Pitstop.Infrastructure.Messaging;
-using Pitstop.Application.BaggageSetManagement.Commands;
-using Pitstop.Application.BaggageSetManagement.Events;
+using Pitstop.BaggageSetManagement.Commands;
+using Pitstop.BaggageSetManagement.Events;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Microsoft.Extensions.HealthChecks;
 
-namespace Pitstop.Application.BaggageSetManagement
+namespace Pitstop.BaggageSetManagement
 {
     public class Startup
     {

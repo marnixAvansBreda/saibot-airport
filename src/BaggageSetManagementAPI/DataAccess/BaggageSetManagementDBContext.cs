@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Pitstop.Application.BaggageSetManagement.Model;
+using Pitstop.BaggageSetManagement.Model;
 using Polly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pitstop.Application.BaggageSetManagement.DataAccess
+namespace Pitstop.BaggageSetManagement.DataAccess
 {
     public class BaggageSetManagementDBContext : DbContext
     {
@@ -19,7 +19,7 @@ namespace Pitstop.Application.BaggageSetManagement.DataAccess
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<BaggageSet>().HasKey(b => b.ScheduledFlightId);
+            builder.Entity<BaggageSet>().HasKey(b => b.BaggageSetId);
             builder.Entity<BaggageSet>().ToTable("BaggageSet");
             base.OnModelCreating(builder);
         }

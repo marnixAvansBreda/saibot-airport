@@ -169,6 +169,16 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production
 
+  baggagesetmanagementeventhandler:
+    image: pitstop/baggagemanagementeventhandler:latest
+    build: BaggageSetManagementEventHandler
+    container_name: baggagesetmanagementeventhandler
+    depends_on:
+      - rabbitmq
+      - sqlserverbaggage
+    environment:
+      - DOTNET_ENVIRONMENT=Production    
+
 #  customereventhandler:
 #     image: pitstop/customereventhandler:latest
 #     build: CustomerEventHandler

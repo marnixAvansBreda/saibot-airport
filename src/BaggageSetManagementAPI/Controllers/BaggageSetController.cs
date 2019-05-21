@@ -1,15 +1,15 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Pitstop.Application.BaggageSetManagement.Model;
-using Pitstop.Application.BaggageSetManagement.DataAccess;
+using Pitstop.BaggageSetManagement.Model;
+using Pitstop.BaggageSetManagement.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
 using Pitstop.Infrastructure.Messaging;
-using Pitstop.Application.BaggageSetManagement.Events;
-using Pitstop.Application.BaggageSetManagement.Commands;
+using Pitstop.BaggageSetManagement.Events;
+using Pitstop.BaggageSetManagement.Commands;
 
-namespace Pitstop.Application.BaggageSetManagement.Controllers
+namespace Pitstop.BaggageSetManagement.Controllers
 {
     [Route("/api/[controller]")]
     public class BaggageSetController : Controller
@@ -74,7 +74,8 @@ namespace Pitstop.Application.BaggageSetManagement.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var baggageSet = await _dbContext.BaggageSets.FirstOrDefaultAsync(b => b.ScheduledFlightId == command.ScheduledFlightId);
+                    BaggageSet bSet = Mapper.Map<BaggageSet>(command);
+                    var baggageSet = await _dbContext.BaggageSets.FirstOrDefaultAsync(b => b.ScheduledFlightId == bSet.ScheduledFlightId);
                     if (baggageSet == null)
                     {
                         return NotFound();
@@ -108,12 +109,14 @@ namespace Pitstop.Application.BaggageSetManagement.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var baggageSet = await _dbContext.BaggageSets.FirstOrDefaultAsync(b => b.ScheduledFlightId == command.ScheduledFlightId);
+                    BaggageSet bSet = Mapper.Map<BaggageSet>(command);
+                    var baggageSet = await _dbContext.BaggageSets.FirstOrDefaultAsync(b => b.ScheduledFlightId == bSet.ScheduledFlightId);
                     if (baggageSet == null)
                     {
                         return NotFound();
                     } 
                     baggageSet.DeliveredToBaggageClaim = true;
+                    baggageSet.BaggageClaimId = bSet.BaggageClaimId;
                     _dbContext.Update(baggageSet);
                     await _dbContext.SaveChangesAsync();
 
