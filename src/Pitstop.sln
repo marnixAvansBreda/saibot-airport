@@ -40,7 +40,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceService", "InvoiceSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Messaging", "Infrastructure.Messaging\Infrastructure.Messaging.csproj", "{2A627307-3EB2-4011-B304-BBC256738493}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightManagementAPI", "FlightManagementAPI\FlightManagementAPI.csproj", "{1286BE93-EA2D-4B03-84A2-40F615A61CA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightManagementAPI", "FlightManagementAPI\FlightManagementAPI.csproj", "{1286BE93-EA2D-4B03-84A2-40F615A61CA7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaggageSetManagement", "BaggageSetManagementAPI\BaggageSetManagement.csproj", "{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -184,6 +186,18 @@ Global
 		{1286BE93-EA2D-4B03-84A2-40F615A61CA7}.Release|x64.Build.0 = Release|Any CPU
 		{1286BE93-EA2D-4B03-84A2-40F615A61CA7}.Release|x86.ActiveCfg = Release|Any CPU
 		{1286BE93-EA2D-4B03-84A2-40F615A61CA7}.Release|x86.Build.0 = Release|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Release|x64.Build.0 = Release|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD0D812C-A68E-44B6-9B66-6B0C6A58236D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

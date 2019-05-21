@@ -71,5 +71,41 @@ namespace Pitstop.Application.FlightManagement.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> RemoveAsync([FromBody] RemoveFlight command)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Flight flight = Mapper.Map<Flight>(command);
+                    var currentFlight = await _dbContext.Flights.FirstOrDefaultAsync(v => v.FlightNumber == flight.FlightNumber);
+                    if (currentFlight == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // remove flight
+                    _dbContext.Flights.Remove(currentFlight);
+                    await _dbContext.SaveChangesAsync();
+
+                    // send event
+                    var e = Mapper.Map<FlightRemoved>(command);
+                    await _messagePublisher.PublishMessageAsync(e.MessageType, e, "");
+
+                    //return result
+                    return NoContent();
+                }
+                return BadRequest();
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save changes. " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
     }
 }
