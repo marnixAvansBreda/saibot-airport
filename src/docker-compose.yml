@@ -152,6 +152,15 @@ services:
     environment:
     - DOTNET_ENVIRONMENT=Production
 
+  bordersecuritynotificationservice:
+    image:pitstop/bordersecuritynotificationservice:latest
+    build:BorderSecurityNotificationService
+    container_name: bordersecuritynotificationservice
+    depends_on:
+      - rabbitmq
+    environment:
+      - DOTNET_ENVIRONMENT=Production
+
   flightplanningmanagementeventhandler:
     image: pitstop/flightplanningmanagementeventhandler:latest
     build: FlightPlanningManagementEventHandler
