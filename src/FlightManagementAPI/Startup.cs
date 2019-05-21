@@ -5,18 +5,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using Pitstop.Application.FlightManagement.DataAccess;
+using Pitstop.FlightManagement.DataAccess;
 using Swashbuckle.AspNetCore.Swagger;
 using AutoMapper;
-using Pitstop.Application.FlightManagement.Model;
+using Pitstop.FlightManagement.Model;
 using Pitstop.Infrastructure.Messaging;
-using Pitstop.Application.FlightManagement.Commands;
-using Pitstop.Application.FlightManagement.Events;
+using Pitstop.FlightManagement.Commands;
+using Pitstop.FlightManagement.Events;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Microsoft.Extensions.HealthChecks;
 
-namespace Pitstop.Application.FlightManagement
+namespace Pitstop.FlightManagement
 {
     public class Startup
     {
@@ -81,12 +81,12 @@ namespace Pitstop.Application.FlightManagement
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FlightManagement API - v1");
             });
 
-            // auto migrate db
-            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                scope.ServiceProvider.GetService<FlightManagementDBContext>().MigrateDB();
-            }                     
-        }
+			// auto migrate db
+			using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+			{
+				scope.ServiceProvider.GetService<FlightManagementDBContext>().MigrateDB();
+			}
+		}
 
         private void SetupAutoMapper()
         {

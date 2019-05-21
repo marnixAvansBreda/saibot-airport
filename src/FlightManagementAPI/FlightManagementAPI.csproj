@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Pitstop.FlightManagement</AssemblyName>
-    <RootNamespace>Pitstop.Application.FlightManagement</RootNamespace>
+    <RootNamespace>Pitstop.FlightManagement</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pitstop.Application.FlightManagement.Commands
+namespace Pitstop.FlightManagement.Commands
 {
     public class RemoveFlight : Command
     {

@@ -11,7 +11,8 @@ namespace Pitstop.FlightPlanningManagementAPI.Migrations
                 name: "Airline",
                 columns: table => new
                 {
-                    AirlineId = table.Column<string>(nullable: false)
+                    AirlineId = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

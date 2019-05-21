@@ -3,16 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pitstop.Application.FlightManagement.Events
+namespace Pitstop.FlightManagement.Events
 {
     public class FlightRemoved : Event
     {
-        public readonly string FlightNumber;
+        public readonly string FlightId;
 
-        public FlightRemoved(Guid messageId, string flightNumber) :
+        public FlightRemoved(Guid messageId, string flightId) :
             base(messageId)
         {
-            FlightNumber = flightNumber;
+            FlightId = flightId;
         }
     }
 }

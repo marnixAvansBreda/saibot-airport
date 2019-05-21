@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
 using Serilog;
 
-namespace Pitstop.Application.FlightManagement
+namespace Pitstop.FlightManagement
 {
     public class Program
     {

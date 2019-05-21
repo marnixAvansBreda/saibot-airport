@@ -1,16 +1,16 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Pitstop.Application.FlightManagement.Model;
-using Pitstop.Application.FlightManagement.DataAccess;
+using Pitstop.FlightManagement.Model;
+using Pitstop.FlightManagement.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
 using Pitstop.Infrastructure.Messaging;
-using Pitstop.Application.FlightManagement.Events;
-using Pitstop.Application.FlightManagement.Commands;
+using Pitstop.FlightManagement.Events;
+using Pitstop.FlightManagement.Commands;
 using System;
 
-namespace Pitstop.Application.FlightManagement.Controllers
+namespace Pitstop.FlightManagement.Controllers
 {
     [Route("/api/[controller]")]
     public class FlightsController : Controller
@@ -31,10 +31,10 @@ namespace Pitstop.Application.FlightManagement.Controllers
         }
 
         [HttpGet]
-        [Route("{flightNumber}", Name = "GetByFlightNumber")]
-        public async Task<IActionResult> GetByFlightNumber(string flightNumber)
+        [Route("{FlightId}", Name = "GetByFlightId")]
+        public async Task<IActionResult> GetByFlightId(string FlightId)
         {
-            var flight = await _dbContext.Flights.FirstOrDefaultAsync(v => v.FlightNumber == flightNumber);
+            var flight = await _dbContext.Flights.FirstOrDefaultAsync(v => v.FlightId == FlightId);
             if (flight == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace Pitstop.Application.FlightManagement.Controllers
                     await _messagePublisher.PublishMessageAsync(e.MessageType, e, "");
 
                     //return result
-                    return CreatedAtRoute("GetByFlightNumber", new { flightNumber = flight.FlightNumber }, flight);
+                    return CreatedAtRoute("GetByFlightId", new { flightId = flight.FlightId }, flight);
                 }
                 return BadRequest();
             }
@@ -80,7 +80,7 @@ namespace Pitstop.Application.FlightManagement.Controllers
                 if (ModelState.IsValid)
                 {
                     Flight flight = Mapper.Map<Flight>(command);
-                    var currentFlight = await _dbContext.Flights.FirstOrDefaultAsync(v => v.FlightNumber == flight.FlightNumber);
+                    var currentFlight = await _dbContext.Flights.SingleOrDefaultAsync(v => v.FlightId == flight.FlightId);
                     if (currentFlight == null)
                     {
                         return NotFound();

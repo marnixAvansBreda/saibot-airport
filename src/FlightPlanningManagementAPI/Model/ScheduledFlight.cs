@@ -1,4 +1,4 @@
-﻿using Pitstop.FlightPlanningManagementAPI.Domain;
+﻿using Pitstop.FlightPlanningManagementAPI.Model;
 using System;
 using System.Collections.Generic;
 

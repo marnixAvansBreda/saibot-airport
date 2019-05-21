@@ -16,6 +16,9 @@ namespace Pitstop.FlightPlanningManagementAPI.DataAccess
         }
 
         public DbSet<FlightPlanning> FlightPlannings { get; set; }
+        public DbSet<ScheduledFlight> ScheduledFlights { get; set; }
+        public DbSet<Airline> Airlines { get; set; }
+        public DbSet<Gate> Gates { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -24,6 +27,12 @@ namespace Pitstop.FlightPlanningManagementAPI.DataAccess
 
             builder.Entity<ScheduledFlight>().HasKey(sf => new { sf.ScheduledFlightId, sf.PlanningId });
             builder.Entity<ScheduledFlight>().ToTable("ScheduledFlight");
+
+            builder.Entity<Airline>().HasKey(a => a.AirlineId);
+            builder.Entity<Airline>().ToTable("Airline");
+
+            builder.Entity<Gate>().HasKey(g => g.GateId);
+            builder.Entity<Gate>().ToTable("Gate");
 
             base.OnModelCreating(builder);
         }

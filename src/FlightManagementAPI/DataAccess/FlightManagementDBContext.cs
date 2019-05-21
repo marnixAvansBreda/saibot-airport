@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Pitstop.Application.FlightManagement.Model;
+using Pitstop.FlightManagement.Model;
 using Polly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pitstop.Application.FlightManagement.DataAccess
+namespace Pitstop.FlightManagement.DataAccess
 {
     public class FlightManagementDBContext : DbContext
     {
@@ -16,11 +16,16 @@ namespace Pitstop.Application.FlightManagement.DataAccess
         }
 
         public DbSet<Flight> Flights { get; set; }
+        public DbSet<Airline> Airlines { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Flight>().HasKey(m => m.FlightNumber);
+            builder.Entity<Flight>().HasKey(f => f.FlightId);
             builder.Entity<Flight>().ToTable("Flight");
+
+            builder.Entity<Airline>().HasKey(a => a.AirlineId);
+            builder.Entity<Airline>().ToTable("Airline");
+
             base.OnModelCreating(builder);
         }
 

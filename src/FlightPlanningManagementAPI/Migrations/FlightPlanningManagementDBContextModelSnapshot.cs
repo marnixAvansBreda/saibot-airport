@@ -19,24 +19,16 @@ namespace Pitstop.FlightPlanningManagementAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Pitstop.FlightPlanningManagementAPI.Domain.Airline", b =>
+            modelBuilder.Entity("Pitstop.FlightPlanningManagementAPI.Model.Airline", b =>
                 {
                     b.Property<string>("AirlineId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name");
+
                     b.HasKey("AirlineId");
 
                     b.ToTable("Airline");
-                });
-
-            modelBuilder.Entity("Pitstop.FlightPlanningManagementAPI.Domain.Gate", b =>
-                {
-                    b.Property<string>("GateId")
-                        .ValueGeneratedOnAdd();
-
-                    b.HasKey("GateId");
-
-                    b.ToTable("Gate");
                 });
 
             modelBuilder.Entity("Pitstop.FlightPlanningManagementAPI.Model.FlightPlanning", b =>
@@ -47,6 +39,16 @@ namespace Pitstop.FlightPlanningManagementAPI.Migrations
                     b.HasKey("FlightPlanningId");
 
                     b.ToTable("FlightPlanning");
+                });
+
+            modelBuilder.Entity("Pitstop.FlightPlanningManagementAPI.Model.Gate", b =>
+                {
+                    b.Property<string>("GateId")
+                        .ValueGeneratedOnAdd();
+
+                    b.HasKey("GateId");
+
+                    b.ToTable("Gate");
                 });
 
             modelBuilder.Entity("Pitstop.FlightPlanningManagementAPI.Model.ScheduledFlight", b =>
@@ -80,7 +82,7 @@ namespace Pitstop.FlightPlanningManagementAPI.Migrations
 
             modelBuilder.Entity("Pitstop.FlightPlanningManagementAPI.Model.ScheduledFlight", b =>
                 {
-                    b.HasOne("Pitstop.FlightPlanningManagementAPI.Domain.Airline", "Airline")
+                    b.HasOne("Pitstop.FlightPlanningManagementAPI.Model.Airline", "Airline")
                         .WithMany()
                         .HasForeignKey("AirlineId");
 
@@ -88,7 +90,7 @@ namespace Pitstop.FlightPlanningManagementAPI.Migrations
                         .WithMany("Flights")
                         .HasForeignKey("FlightPlanningId");
 
-                    b.HasOne("Pitstop.FlightPlanningManagementAPI.Domain.Gate", "Gate")
+                    b.HasOne("Pitstop.FlightPlanningManagementAPI.Model.Gate", "Gate")
                         .WithMany()
                         .HasForeignKey("GateId");
                 });

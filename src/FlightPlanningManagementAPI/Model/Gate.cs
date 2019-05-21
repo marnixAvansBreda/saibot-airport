@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Pitstop.FlightPlanningManagementAPI.Domain
+namespace Pitstop.FlightPlanningManagementAPI.Model
 {
 	public class Gate
 	{

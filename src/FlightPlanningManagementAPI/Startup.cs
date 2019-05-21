@@ -81,11 +81,11 @@ namespace Pitstop.FlightPlanningManagementAPI
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "FlightPlanningManagement API - v1");
             });
 
-            // auto migrate db
-            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                scope.ServiceProvider.GetService<FlightPlanningManagementDBContext>().MigrateDB();
-            }
+			// auto migrate db
+			using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+			{
+				scope.ServiceProvider.GetService<FlightPlanningManagementDBContext>().MigrateDB();
+			}
 		}
 
         private void SetupAutoMapper()
