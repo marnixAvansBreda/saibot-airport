@@ -10,8 +10,8 @@ using Pitstop.BaggageSetManagementEventHandler.DataAccess;
 namespace Pitstop.BaggageSetManagementEventHandler.Migrations
 {
     [DbContext(typeof(BaggageSetManagementDBContext))]
-    [Migration("20190521083433_v2")]
-    partial class v2
+    [Migration("20190521131909_v1")]
+    partial class v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
