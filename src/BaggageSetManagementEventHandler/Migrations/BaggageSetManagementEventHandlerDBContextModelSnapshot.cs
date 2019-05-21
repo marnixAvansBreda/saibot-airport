@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Pitstop.BaggageSetManagement.DataAccess;
+using Pitstop.BaggageSetManagementEventHandler.DataAccess;
 
-namespace Pitstop.BaggageSetManagement.Migrations
+namespace Pitstop.BaggageSetManagementEventHandler.Migrations
 {
     [DbContext(typeof(BaggageSetManagementDBContext))]
     partial class BaggageSetManagementDBContextModelSnapshot : ModelSnapshot

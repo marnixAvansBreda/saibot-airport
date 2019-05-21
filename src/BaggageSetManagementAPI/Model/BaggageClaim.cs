@@ -1,6 +1,6 @@
 using System;
 
-namespace Pitstop.Application.BaggageSetManagement.Model
+namespace Pitstop.BaggageSetManagement.Model
 
 {
     public class BaggageClaim

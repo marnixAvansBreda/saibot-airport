@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BaggageSetManagementEventHandler": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "PITSTOP_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

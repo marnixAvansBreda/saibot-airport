@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Pitstop.Application.BaggageSetManagement.Commands
+namespace Pitstop.BaggageSetManagement.Commands
 {
     public class LoadBaggageOnFlight : Command
     {
