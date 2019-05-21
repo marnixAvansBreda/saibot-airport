@@ -37,6 +37,18 @@ services:
       - MSSQL_PID=Developer
       - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
 
+  sqlserverflightschedule:
+     image: microsoft/mssql-server-linux:latest
+     container_name: sqlserverflightschedule
+     volumes:
+       - sqlserverflightscheduledata:/var/opt/mssql 
+     ports:
+       - "1441:1433"
+     environment:
+       - ACCEPT_EULA=Y 
+       - MSSQL_PID=Developer
+       - SA_PASSWORD=8jkGh47hnDw89Haq8LN2
+
   sqlserverbaggage:
     image: microsoft/mssql-server-linux:latest
     container_name: sqlserverbaggage
@@ -80,15 +92,15 @@ services:
     environment:
       - DOTNET_ENVIRONMENT=Production
 
-  flightplanningmanagementeventhandler:
-    image: pitstop/flightplanningmanagementeventhandler:latest
-    build: FlightPlanningManagementEventHandler
-    container_name: flightplanningmanagementeventhandler
-    depends_on:
-      - rabbitmq
-      - sqlserverflightplanningmanagement
+  customermanagementapi:
+    image: pitstop/customermanagementapi:latest
+    build: CustomerManagementAPI
+
+      - sqlserver
+    ports:
+      - "5100"
     environment:
-      - DOTNET_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Production
 
   baggagesetmanagementapi:
     image: pitstop/baggagesetmanagementapi:latest
@@ -136,11 +148,28 @@ services:
       - rabbitmq
       - sqlserverbaggage
     environment:
-      - DOTNET_ENVIRONMENT=Production    
+      - DOTNET_ENVIRONMENT=Production
+
+  flightschedulemanagementeventhandler:
+    image: pitstop/flightschedulemanagementeventhandler:latest
+    build: FlightScheduleManagementEventHandler
+    container_name: flightschedulemanagementeventhandler
+    depends_on:
+    - rabbitmq
+    - sqlserverflightschedule
+    environment:
+    - DOTNET_ENVIRONMENT=Production
+
+
+
 
 volumes:
+  sqlserverdata:
+    external: true   
   sqlserverflightmanagementdata:
-    external: true    
+    external: true
+  sqlserverflightscheduledata:
+    external: true
   sqlserverflightplanningmanagementdata:
     external: true  
   rabbitmqdata:
